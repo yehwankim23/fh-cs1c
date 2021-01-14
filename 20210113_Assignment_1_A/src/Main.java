@@ -14,6 +14,7 @@ public class Main
 
       ArrayList<Integer> sublist = new ArrayList<Integer>();
       int sublistSum = 0;
+      int sublistMin = Integer.MAX_VALUE;
 
       // add elements to sublist
       for (int i = 1; i <= NUM_OF_ELEMENTS; i++)
@@ -21,6 +22,11 @@ public class Main
          int element = i * i;
          sublist.add(element);
          sublistSum += element;
+
+         if (element < sublistMin)
+         {
+            sublistMin = element;
+         }
       }
 
       ArrayList<Sublist> collection = new ArrayList<Sublist>();
@@ -32,8 +38,20 @@ public class Main
       System.out.println("target:\n   " + TARGET + "\n");
       System.out.println("subsets:");
 
-      if (TARGET <= sublistSum)
+      if (TARGET > sublistSum)
       {
+         System.out.println("   target is too large");
+      }
+      else if (TARGET < sublistMin)
+      {
+         System.out.println("   target is too small");
+      }
+      else
+      {
+         boolean found = false;
+         int maxSum = 0;
+         int index = -1;
+
          // algorithm
          for (int i = 0; i < NUM_OF_ELEMENTS; i++)
          {
@@ -48,44 +66,32 @@ public class Main
                if (sum <= TARGET)
                {
                   collection.add(subset.addItem(i));
-               }
-               else
-               {
-                  break;
+
+                  if (sum > maxSum)
+                  {
+                     maxSum = sum;
+                     index = collection.size() - 1;
+                  }
+
+                  if (sum == TARGET)
+                  {
+                     found = true;
+                     break;
+                  }
                }
             }
-         }
 
-         int maxSum = 0;
-         int index = -1;
-
-         for (int i = 0; i < collection.size(); i++)
-         {
-            int sum = collection.get(i).getSum();
-
-            if (sum > maxSum)
+            if (found)
             {
-               maxSum = sum;
-               index = i;
+               break;
             }
          }
 
-         // show subsets
-         if (index == -1)
-         {
-            System.out.println("   target is too small");
-         }
-         else
-         {
-            subset = collection.get(index);
+         // show subset
+         subset = collection.get(index);
 
-            System.out.println("   sum: " + subset.getSum());
-            subset.showSublist();
-         }
-      }
-      else
-      {
-         System.out.println("   target is too large");
+         System.out.println("   sum: " + subset.getSum());
+         subset.showSublist();
       }
    }
 }
@@ -108,10 +114,10 @@ target:
 subsets:
    sum: 127
    array[0] = 1
-   array[1] = 16
-   array[2] = 25
-   array[3] = 36
-   array[4] = 49
+   array[3] = 16
+   array[4] = 25
+   array[5] = 36
+   array[6] = 49
 
  */
 
@@ -122,12 +128,12 @@ target:
 subsets:
    sum: 256
    array[0] = 1
-   array[1] = 9
-   array[2] = 16
-   array[3] = 36
-   array[4] = 49
-   array[5] = 64
-   array[6] = 81
+   array[2] = 9
+   array[3] = 16
+   array[5] = 36
+   array[6] = 49
+   array[7] = 64
+   array[8] = 81
 
  */
 

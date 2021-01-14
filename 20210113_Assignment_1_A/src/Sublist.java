@@ -42,9 +42,8 @@ public class Sublist implements Cloneable
          e.printStackTrace();
       }
 
-      int element = originalObjects.get(indexOfItemToAdd);
-      subset.indices.add(element);
-      subset.sum += element;
+      subset.indices.add(indexOfItemToAdd);
+      subset.sum += originalObjects.get(indexOfItemToAdd);
 
       return subset;
    }
@@ -53,7 +52,10 @@ public class Sublist implements Cloneable
    {
       for (int i = 0; i < indices.size(); i++)
       {
-         System.out.println("   array[" + i + "] = " + indices.get(i));
+         int index = indices.get(i);
+
+         System.out.println(
+               "   array[" + index + "] = " + originalObjects.get(index));
       }
    }
 }

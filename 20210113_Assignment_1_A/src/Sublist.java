@@ -51,18 +51,9 @@ public class Sublist implements Cloneable
 
    public void showSublist()
    {
-      System.out.print("[");
-
       for (int i = 0; i < indices.size(); i++)
       {
-         System.out.print(indices.get(i));
-
-         if (i < indices.size() - 1)
-         {
-            System.out.print(", ");
-         }
+         System.out.println("   array[" + i + "] = " + indices.get(i));
       }
-
-      System.out.println("]");
    }
 }

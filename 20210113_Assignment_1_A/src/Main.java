@@ -10,7 +10,7 @@ public class Main
    public static void main(String[] args)
    {
       final int NUM_OF_ELEMENTS = 9;
-      final int TARGET = 300;
+      final int TARGET = 512;
 
       ArrayList<Integer> sublist = new ArrayList<Integer>();
       int sublistSum = 0;
@@ -29,7 +29,6 @@ public class Main
       // add empty subset to collection
       collection.add(subset);
 
-      System.out.println("sublist:\n   " + sublist + "\n");
       System.out.println("target:\n   " + TARGET + "\n");
       System.out.println("subsets:");
 
@@ -57,14 +56,31 @@ public class Main
             }
          }
 
-         // show subsets
+         int maxSum = 0;
+         int index = -1;
+
          for (int i = 0; i < collection.size(); i++)
          {
-            if (collection.get(i).getSum() == TARGET)
+            int sum = collection.get(i).getSum();
+
+            if (sum > maxSum)
             {
-               System.out.print("   ");
-               collection.get(i).showSublist();
+               maxSum = sum;
+               index = i;
             }
+         }
+
+         // show subsets
+         if (index == -1)
+         {
+            System.out.println("   target is too small");
+         }
+         else
+         {
+            subset = collection.get(index);
+
+            System.out.println("   sum: " + subset.getSum());
+            subset.showSublist();
          }
       }
       else
@@ -77,47 +93,47 @@ public class Main
 // @formatter:off (Eclipse formatter tag)
 
 /* Output 1
-sublist:
-   [1, 4, 9, 16, 25, 36, 49, 64, 81]
-
 target:
-   23
+   0
 
 subsets:
+   target is too small
 
  */
 
 /* Output 2
-sublist:
-   [1, 4, 9, 16, 25, 36, 49, 64, 81]
-
 target:
-   100
+   128
 
 subsets:
-   [1, 9, 16, 25, 49]
+   sum: 127
+   array[0] = 1
+   array[1] = 16
+   array[2] = 25
+   array[3] = 36
+   array[4] = 49
 
  */
 
 /* Output 3
-sublist:
-   [1, 4, 9, 16, 25, 36, 49, 64, 81]
-
 target:
-   200
+   256
 
 subsets:
-   [1, 9, 16, 25, 36, 49, 64]
-   [9, 25, 36, 49, 81]
+   sum: 256
+   array[0] = 1
+   array[1] = 9
+   array[2] = 16
+   array[3] = 36
+   array[4] = 49
+   array[5] = 64
+   array[6] = 81
 
  */
 
 /* Output 4
-sublist:
-   [1, 4, 9, 16, 25, 36, 49, 64, 81]
-
 target:
-   300
+   512
 
 subsets:
    target is too large

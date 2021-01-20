@@ -5,8 +5,7 @@ import cs_1c.MyLinkedList;
 
 public class SparseMatrix<E> implements Cloneable
 {
-   private static final int MIN_ROWS = 1;
-   private static final int MIN_COLS = 1;
+   private static final int MIN_SIZE = 1;
 
    protected int rowSize, colSize;
    protected E defaultValue;
@@ -14,24 +13,13 @@ public class SparseMatrix<E> implements Cloneable
 
    public SparseMatrix(int numRows, int numCols, E defaultVal)
    {
-      if (numRows < MIN_ROWS)
+      if (numRows < MIN_SIZE || numCols < MIN_SIZE || defaultVal == null)
       {
-         rowSize = MIN_ROWS;
-      }
-      else
-      {
-         rowSize = numRows;
+         throw new IllegalArgumentException();
       }
 
-      if (numCols < MIN_COLS)
-      {
-         colSize = MIN_COLS;
-      }
-      else
-      {
-         colSize = numCols;
-      }
-
+      rowSize = numRows;
+      colSize = numCols;
       defaultValue = defaultVal;
 
       allocateEmptyMatrix();

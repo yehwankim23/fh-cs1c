@@ -41,6 +41,14 @@ public class Main
       if (TARGET > sublistSum)
       {
          System.out.println("   target is too large");
+
+         for (int i = 0; i < NUM_OF_ELEMENTS; i++)
+         {
+            subset = subset.addItem(i);
+         }
+
+         System.out.println("   sum: " + subset.getSum());
+         subset.showSublist();
       }
       else if (TARGET < sublistMin)
       {
@@ -143,5 +151,15 @@ target:
 
 subsets:
    target is too large
+   sum: 285
+   array[0] = 1
+   array[1] = 4
+   array[2] = 9
+   array[3] = 16
+   array[4] = 25
+   array[5] = 36
+   array[6] = 49
+   array[7] = 64
+   array[8] = 81
 
  */

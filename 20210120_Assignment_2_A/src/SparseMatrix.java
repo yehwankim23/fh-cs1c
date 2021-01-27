@@ -1,11 +1,14 @@
 
 // SparseMatrix.java -----------------------------------------------------------
+import java.text.DecimalFormat;
+import java.util.ListIterator;
+
 import cs_1c.MyArrayList;
 import cs_1c.MyLinkedList;
 
 public class SparseMatrix<E> implements Cloneable
 {
-   private static final int MIN_SIZE = 1;
+   public static final int MIN_SIZE = 1;
 
    protected int rowSize, colSize;
    protected E defaultValue;
@@ -25,99 +28,73 @@ public class SparseMatrix<E> implements Cloneable
       allocateEmptyMatrix();
    }
 
-   public E get(int r, int c)
+   public E get(int row, int col)
    {
-      if (r < 0 || r >= rowSize || c < 0 || c >= colSize)
+      if (!isValid(row, col))
       {
          throw new IndexOutOfBoundsException();
       }
 
-      MyLinkedList<MatrixNode> row = rows.get(r);
-      int size = row.size();
-
-      for (int i = 0; i < size; i++)
+      for (ListIterator<MatrixNode> iter = rows.get(row).listIterator();
+            iter.hasNext();)
       {
-         MatrixNode node = row.get(i);
-         int column = node.col;
-
-         if (column == c)
+         if (iter.next().col == col)
          {
-            return node.data;
-         }
-         else if (column < c)
-         {
-            break;
+            return iter.previous().data;
          }
       }
 
       return defaultValue;
    }
 
-   public boolean set(int r, int c, E x)
+   public boolean set(int row, int col, E x)
    {
-      if (r < 0 || r >= rowSize || c < 0 || c >= colSize)
+      if (!isValid(row, col))
       {
          return false;
       }
 
-      MyLinkedList<MatrixNode> row = rows.get(r);
-      int size = row.size();
-      boolean isDefault = x.equals(defaultValue);
-
-      if (size == 0)
+      for (ListIterator<MatrixNode> iter = rows.get(row).listIterator();
+            iter.hasNext();)
       {
-         if (!isDefault)
+         if (iter.next().col == col)
          {
-            row.add(new MatrixNode(c, x));
-         }
-      }
-      else
-      {
-         MatrixNode node = null;
-         int index = 0;
-         boolean exists = false;
-
-         while (index < size)
-         {
-            node = row.get(index);
-            int column = node.col;
-
-            if (column == c)
+            if (x.equals(defaultValue))
             {
-               exists = true;
-               break;
-            }
-            else if (column < c)
-            {
-               if (index > 0)
-               {
-                  index--;
-               }
-
-               break;
-            }
-
-            index++;
-         }
-
-         if (exists)
-         {
-            if (isDefault)
-            {
-               row.remove(index);
+               iter.remove();
             }
             else
             {
-               node.data = x;
+               iter.previous().data = x;
             }
+
+            return true;
          }
-         else
-         {
-            if (!isDefault)
-            {
-               row.add(index, new MatrixNode(c, x));
-            }
-         }
+      }
+
+      if (!x.equals(defaultValue))
+      {
+         rows.get(row).add(new MatrixNode(col, x));
+      }
+
+      return true;
+   }
+
+   protected void allocateEmptyMatrix()
+   {
+      rows = new MyArrayList<MyLinkedList<MatrixNode>>();
+
+      for (int row = 0; row < rowSize; row++)
+      {
+         rows.add(new MyLinkedList<MatrixNode>());
+      }
+   }
+
+   protected boolean isValid(int row, int col)
+   {
+      if (row < 0 || row >= rowSize || col < 0 || col >= colSize)
+      {
+         return false;
       }
 
       return true;
@@ -125,21 +102,29 @@ public class SparseMatrix<E> implements Cloneable
 
    public void clear()
    {
-      for (int i = 0; i < rowSize; i++)
+      for (int row = 0; row < rowSize; row++)
       {
-         rows.get(i).clear();
+         rows.get(row).clear();
       }
    }
 
    public void showSubSquare(int start, int size)
    {
-      for (int i = 0; i < size; i++)
+      if (start < 0 || size < 0 || start + size > rowSize
+            || start + size > colSize)
       {
-         for (int j = 0; j < size; j++)
-         {
-            System.out.print(this.get(start + i, start + j));
+         return;
+      }
 
-            if (j < size - 1)
+      DecimalFormat format = new DecimalFormat("0.0#");
+
+      for (int row = start; row < start + size; row++)
+      {
+         for (int col = start; col < start + size; col++)
+         {
+            System.out.print(format.format(get(row, col)));
+
+            if (col < start + size - 1)
             {
                System.out.print("\t");
             }
@@ -147,16 +132,8 @@ public class SparseMatrix<E> implements Cloneable
 
          System.out.println();
       }
-   }
 
-   private void allocateEmptyMatrix()
-   {
-      rows = new MyArrayList<MyLinkedList<MatrixNode>>(rowSize);
-
-      for (int i = 0; i < rowSize; i++)
-      {
-         rows.add(new MyLinkedList<MatrixNode>());
-      }
+      System.out.println();
    }
 
    protected class MatrixNode implements Cloneable

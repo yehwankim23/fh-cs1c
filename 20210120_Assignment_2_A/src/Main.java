@@ -24,7 +24,7 @@ public class Main
 
       matrix1.clear();
 
-      System.out.println("\nclear()\n");
+      System.out.println("clear()\n");
       matrix1.showSubSquare(0, 12);
 
       for (int row = 10; row > 0; row--)
@@ -35,7 +35,7 @@ public class Main
          }
       }
 
-      System.out.println("\nset(): right-to-left and bottom-to-top\n");
+      System.out.println("set(): right-to-left and bottom-to-top\n");
       matrix1.showSubSquare(0, 12);
 
       for (int row = 1; row < 11; row++)
@@ -46,7 +46,7 @@ public class Main
          }
       }
 
-      System.out.println("\nset(): all default values\n");
+      System.out.println("set(): all default values\n");
       matrix1.showSubSquare(0, 12);
    }
 }
@@ -113,5 +113,6 @@ set(): all default values
 0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0
 0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0
 0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0
+
 
  */

@@ -25,7 +25,7 @@ public class Main
 
       matrix1.clear();
 
-      System.out.println("\nclear()\n");
+      System.out.println("clear()\n");
       matrix1.showSubSquare(0, 12);
 
       for (int row = 10; row > 0; row--)
@@ -36,7 +36,7 @@ public class Main
          }
       }
 
-      System.out.println("\nset(): right-to-left and bottom-to-top\n");
+      System.out.println("set(): right-to-left and bottom-to-top\n");
       matrix1.showSubSquare(0, 12);
 
       SparseMatrix<Double> matrix2 = (SparseMatrix<Double>) matrix1.clone();
@@ -45,14 +45,14 @@ public class Main
       {
          for (int column = 1; column < 11; column++)
          {
-            matrix1.set(row, column, 0.0);
+            matrix1.set(row, column, -1.0);
          }
       }
 
-      System.out.println("\nmodify matrix1\n");
+      System.out.println("modify matrix1\n");
       matrix1.showSubSquare(0, 12);
 
-      System.out.println("\nmatrix2 is not affected\n");
+      System.out.println("matrix2 is not affected\n");
       matrix2.showSubSquare(0, 12);
    }
 }
@@ -108,16 +108,16 @@ set(): right-to-left and bottom-to-top
 modify matrix1
 
 0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0
-0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0
-0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0
-0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0
-0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0
-0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0
-0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0
-0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0
-0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0
-0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0
-0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0
+0.0   -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  0.0
+0.0   -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  0.0
+0.0   -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  0.0
+0.0   -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  0.0
+0.0   -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  0.0
+0.0   -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  0.0
+0.0   -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  0.0
+0.0   -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  0.0
+0.0   -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  0.0
+0.0   -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  -1.0  0.0
 0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0
 
 matrix2 is not affected
@@ -134,5 +134,6 @@ matrix2 is not affected
 0.0   81.0  82.0  83.0  84.0  85.0  86.0  87.0  88.0  89.0  90.0  0.0
 0.0   91.0  92.0  93.0  94.0  95.0  96.0  97.0  98.0  99.0  100.0 0.0
 0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0   0.0
+
 
  */

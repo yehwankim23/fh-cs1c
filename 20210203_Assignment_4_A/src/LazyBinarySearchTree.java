@@ -288,6 +288,7 @@ public class LazyBinarySearchTree<E extends Comparable<? super E>>
          LazyBinarySearchTreeNode<E> rightChildMin = findMin(root.rightChild);
          root.deleted = false;
          root.data = rightChildMin.data;
+         rightChildMin.deleted = true;
          root.rightChild = removeHard(rightChildMin);
       }
       else

@@ -14,11 +14,26 @@ public class Main
    public static <E extends Comparable<? super E>> void shellSortX(E[] array,
          int[] gapSequence)
    {
-      for (int gapIndex = gapSequence.length - 1; gapIndex >= 0; gapIndex--)
+      int gapSequenceLength = gapSequence.length;
+
+      if (gapSequenceLength < 1 || gapSequence[0] != 1)
+      {
+         throw new IllegalArgumentException();
+      }
+
+      int gapIndex = gapSequenceLength - 1;
+      int arrayLength = array.length;
+
+      while (gapSequence[gapIndex] >= arrayLength)
+      {
+         gapIndex--;
+      }
+
+      for (; gapIndex >= 0; gapIndex--)
       {
          int gap = gapSequence[gapIndex];
 
-         for (int position = gap; position < array.length; position++)
+         for (int position = gap; position < arrayLength; position++)
          {
             E temp = array[position];
             int index = position;
